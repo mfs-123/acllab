@@ -1,5 +1,4 @@
-%First, define variables for the message and polynomial divisor. Use unsigned 32-bit integers so that
-extra bits are available for the remainder.
+%First, define variables for the message and polynomial divisor. Use unsigned 32-bit integers so that extra bits are available for the remainder.
 message = 0b1101100111011010u32;
 messageLength = 16;
 divisor = 0b1111u32;
@@ -7,8 +6,7 @@ divisorDegree = 3;
 %Initialize the polynomial divisor. Use dec2bin to display the bits of the result.
 divisor = bitshift(divisor,messageLength-divisorDegree-1);
 dec2bin(divisor)
-%Shift the divisor and message so that they have the correct number of bits (16 bits for the message and 3
-bits for the remainder).
+%Shift the divisor and message so that they have the correct number of bits (16 bits for the message and 3 bits for the remainder).
 divisor = bitshift(divisor,divisorDegree);
 remainder = bitshift(message,divisorDegree);
 dec2bin(divisor)

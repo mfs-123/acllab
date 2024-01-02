@@ -33,8 +33,7 @@ plot(t1,bit,'lineWidth',2.5);grid on;
 axis([ 0 bp*length(x) -.5 1.5]);
 ylabel('amplitude(volt)');
 xlabel(' time(sec)');
-title('transmitting information as digital signal'); % binary information convert into symbolic
-form for M-ary QAM modulation
+title('transmitting information as digital signal'); % binary information convert into symbolic form for M-ary QAM modulation
 M=M; % order of QAM modulation
 msg_reshape=reshape(msg,log2(M),nbit/log2(M))';
 disp(' information are reshaped for convert symbolic form');

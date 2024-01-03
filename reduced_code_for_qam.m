@@ -38,3 +38,50 @@ M=M; % order of QAM modulation
 msg_reshape=reshape(msg,log2(M),nbit/log2(M))';
 disp(' information are reshaped for convert symbolic form');
 disp(msg_reshape);
+fprintf('\n\n');
+size(msg_reshape);
+for(j=1:1:nbit/log2(M))
+  for(i=1:1:log2(M))
+    a(j,i)=num2str(msg_reshape(j,i));
+  end
+end
+as=bin2dec(a);
+ass=as';
+figure(1)
+subplot(3,1,2);
+stem(ass,'Linewidth',2.0);
+title('serial symbol for M-ary QAM modulation at transmitter');
+xlabel('n(discrete time)');
+ylabel(' magnitude');
+disp('symbolic form information for M-ary QAM ');
+disp(ass);
+fprintf('\n\n'); % Mapping for M-ary QAM modulation
+M=M; %order of QAM modulation
+x1=[0:M-1];
+p=qammod(ass,M) %constellation design for M-ary QAM according to symbol
+sym=0:1:M-1; % considerable symbol of M-ary QAM, just for scatterplot
+pp=qammod(sym,M); %constellation diagram for M-ary QAM
+scatterplot(pp),grid on;
+title('constellation diagram for M-ary QAM');
+% M-ary QAM modulation
+RR=real(p)
+II=imag(p)
+sp=bp*2; %symbol period for M-ary QAM
+sr=1/sp; % symbol rate
+f=sr*2;
+t=sp/100:sp/100:sp;
+ss=length(t);
+m=[];
+for(k=1:1:length(RR))
+  yr=RR(k)*cos(2*pi*f*t); % inphase or real component
+  yim=II(k)*sin(2*pi*f*t); % Quadrature or imaginary component
+  y=yr+yim;
+  m=[m y];
+end
+tt=sp/100:sp/100:sp*length(RR);
+figure(1);
+subplot(3,1,3);
+plot(tt,m);
+title('waveform for M-ary QAM modulation according to symbolic information');
+xlabel('time(sec)');
+ylabel('amplitude(volt)');
